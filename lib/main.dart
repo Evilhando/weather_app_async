@@ -1,116 +1,177 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.blueGrey,
-            title: const Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(36.0),
-                  child: Text(
-                    'Weather App',
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      fontSize: 48,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ],
-            )),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return const MaterialApp(
+      home: WeatherScreen(),
+    );
+  }
+}
+
+class WeatherScreen extends StatefulWidget {
+  const WeatherScreen({Key? key}) : super(key: key);
+
+  @override
+  _WeatherScreenState createState() => _WeatherScreenState();
+}
+
+class _WeatherScreenState extends State<WeatherScreen> {
+  String city = 'Stuttgart';
+  double apparentTemperature = -10.0;
+  double temperature = -4.0;
+  double precipitation = 15.0;
+  String dayTime = 'Tag';
+  double latitude = 48.783;
+  double longitude = 9.183;
+
+  Future<String> getWeatherData() async {
+    const url =
+        'https://api.open-meteo.com/v1/forecast?latitude=48.783333&longitude=9.183333&current=temperature_2m,apparent_temperature,is_day,precipitation&timezone=Europe%2FBerlin&forecast_days=1';
+
+    final response = await http.get(Uri.parse(url));
+
+    return response.body;
+  }
+
+  void updateWeatherData() async {
+    String jsonString = await getWeatherData();
+    final Map<String, dynamic> data = json.decode(jsonString);
+
+    setState(() {
+      city = 'Stuttgart';
+      apparentTemperature = data['current']['apparent_temperature'];
+      temperature = data['current']['temperature_2m'];
+      precipitation = data['current']['precipitation'];
+      dayTime = data['current']['is_day'] == 1 ? 'Tag' : 'Nacht';
+      latitude = data['latitude'];
+      longitude = data['longitude'];
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        title: const Row(
           children: [
-            Center(
-              child: Column(
-                children: [
-                  const Text(
-                    'Stadt: Stuttgart',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Gefühlte Temperatur: -10°',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Temperatur: -4°',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Niederschlag: 15.00 mm',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Tageszeit: Tag',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Standort: lat: 48.783, long: 9.183',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Center(
-                    child: SizedBox(
-                      height: 38,
-                      width: 240,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          side:
-                              const BorderSide(color: Colors.black, width: 0.5),
-                          backgroundColor: const Color.fromARGB(
-                            255,
-                            43,
-                            135,
-                            100,
-                          ),
-                        ),
-                        child: const Text('Prediction update'),
-                      ),
-                    ),
-                  ),
-                ],
+            Padding(
+              padding: EdgeInsets.all(36.0),
+              child: Text(
+                'Weather App',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 46,
+                  color: Colors.black,
+                ),
               ),
             ),
           ],
         ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Column(
+              children: [
+                Text(
+                  'Stadt: $city',
+                  style: const TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.blue,
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                Text(
+                  'Gefühlte Temperatur: $apparentTemperature°',
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                Text(
+                  'Temperatur: $temperature°',
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                Text(
+                  'Niederschlag: $precipitation mm',
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w400),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                Text(
+                  'Tageszeit: $dayTime',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                Text(
+                  'Standort: lat: $latitude, long: $longitude',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(
+                  height: 360,
+                ),
+                Center(
+                  child: SizedBox(
+                    height: 38,
+                    width: 240,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        updateWeatherData();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        side: const BorderSide(color: Colors.black, width: 0.5),
+                        backgroundColor: const Color.fromARGB(
+                          255,
+                          43,
+                          135,
+                          100,
+                        ),
+                      ),
+                      child: const Text(
+                        'Prediction update',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
