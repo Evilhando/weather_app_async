@@ -63,17 +63,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.white70,
-        title: const Row(
+        backgroundColor: Colors.white60,
+        title: Row(
           children: [
             Padding(
-              padding: EdgeInsets.all(36.0),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.1),
               child: Text(
                 'Chapter Weather',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontStyle: FontStyle.italic,
-                  fontSize: 35,
+                  fontSize: MediaQuery.of(context).size.width * 0.077,
                   color: Colors.black,
                 ),
               ),
@@ -81,124 +81,114 @@ class _WeatherScreenState extends State<WeatherScreen> {
           ],
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 16,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 16),
+            Text(
+              'Chapter: $city',
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.1,
+                fontWeight: FontWeight.w800,
+                color: Colors.red,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Gefühlte Temperatur: $apparentTemperature°',
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Temperatur: $temperature°',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Niederschlag: $precipitation mm',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Tageszeit: $dayTime',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Standort: lat: $latitude, long: $longitude',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              height: MediaQuery.of(context).size.width * 0.92,
+              width: MediaQuery.of(context).size.width * 0.94,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/image/sylo_weapon.jpg'),
+                  fit: BoxFit.cover,
                 ),
-                Text(
-                  'Chapter: $city',
-                  style: const TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.red,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.width * 0.1,
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: ElevatedButton(
+                  onPressed: () {
+                    updateWeatherData();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    side: const BorderSide(color: Colors.black, width: 0.5),
+                    backgroundColor: const Color.fromARGB(
+                      255,
+                      255,
+                      255,
+                      255,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Gefühlte Temperatur: $apparentTemperature°',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Temperatur: $temperature°',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Niederschlag: $precipitation mm',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Tageszeit: $dayTime',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Standort: lat: $latitude, long: $longitude',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                    height: 400,
-                    width: 415,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/image/sylo_weapon.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    )),
-                const SizedBox(
-                  height: 16,
-                ),
-                Center(
-                  child: SizedBox(
-                    height: 38,
-                    width: 240,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        updateWeatherData();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        side: const BorderSide(color: Colors.black, width: 0.5),
-                        backgroundColor: const Color.fromARGB(
-                          255,
-                          255,
-                          255,
-                          255,
-                        ),
-                      ),
-                      child: const Text(
-                        'Prediction update',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
+                  child: Text(
+                    'Prediction update',
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
