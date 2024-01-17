@@ -63,29 +63,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.white60,
-        title: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.1),
-              child: Text(
-                'Chapter Weather',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontStyle: FontStyle.italic,
-                  fontSize: MediaQuery.of(context).size.width * 0.077,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
+        toolbarHeight: -0,
+        backgroundColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 16),
             Text(
               'Chapter: $city',
               style: TextStyle(
@@ -94,7 +78,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 color: Colors.red,
               ),
             ),
-            const SizedBox(height: 16),
+            const Divider(
+              color: Colors.red,
+              thickness: 8,
+            ),
+            SizedBox(height: MediaQuery.of(context).size.width * 0.055),
             Text(
               'Gefühlte Temperatur: $apparentTemperature°',
               style: TextStyle(
@@ -158,7 +146,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 36),
+            SizedBox(height: MediaQuery.of(context).size.width * 0.07),
             Center(
               child: SizedBox(
                 height: MediaQuery.of(context).size.width * 0.1,
