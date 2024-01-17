@@ -91,15 +91,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   height: 16,
                 ),
                 Text(
-                  'Stadt: $city',
+                  'Chapter: $city',
                   style: const TextStyle(
-                    fontSize: 36,
+                    fontSize: 40,
                     fontWeight: FontWeight.w800,
                     color: Colors.red,
                   ),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 Text(
                   'Gefühlte Temperatur: $apparentTemperature°',
@@ -110,7 +110,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 Text(
                   'Temperatur: $temperature°',
@@ -121,7 +121,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 Text(
                   'Niederschlag: $precipitation mm',
@@ -132,7 +132,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 Text(
                   'Tageszeit: $dayTime',
@@ -143,7 +143,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 16,
                 ),
                 Text(
                   'Standort: lat: $latitude, long: $longitude',
@@ -154,7 +154,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 360,
+                  height: 16,
+                ),
+                Container(
+                    height: 400,
+                    width: 415,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/image/sylo_weapon.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    )),
+                const SizedBox(
+                  height: 16,
                 ),
                 Center(
                   child: SizedBox(
