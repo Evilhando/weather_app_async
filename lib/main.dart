@@ -61,18 +61,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.white,
         title: const Row(
           children: [
             Padding(
               padding: EdgeInsets.all(36.0),
               child: Text(
-                'Weather App',
+                'Chapter Weather',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontStyle: FontStyle.italic,
-                  fontSize: 46,
+                  fontSize: 35,
                   color: Colors.black,
                 ),
               ),
@@ -86,12 +87,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
           Center(
             child: Column(
               children: [
+                const SizedBox(
+                  height: 16,
+                ),
                 Text(
                   'Stadt: $city',
                   style: const TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.w800,
-                    color: Colors.blue,
+                    color: Colors.red,
                   ),
                 ),
                 const SizedBox(
@@ -100,7 +104,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 Text(
                   'Gefühlte Temperatur: $apparentTemperature°',
                   style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.w600),
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(
                   height: 24,
@@ -108,7 +115,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 Text(
                   'Temperatur: $temperature°',
                   style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.w600),
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(
                   height: 24,
@@ -116,7 +126,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 Text(
                   'Niederschlag: $precipitation mm',
                   style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w400),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(
                   height: 24,
@@ -126,6 +139,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(
@@ -136,6 +150,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(
@@ -153,9 +168,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         side: const BorderSide(color: Colors.black, width: 0.5),
                         backgroundColor: const Color.fromARGB(
                           255,
-                          43,
-                          135,
-                          100,
+                          255,
+                          255,
+                          255,
                         ),
                       ),
                       child: const Text(
