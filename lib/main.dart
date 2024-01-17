@@ -98,7 +98,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             Text(
               'Gefühlte Temperatur: $apparentTemperature°',
               style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontSize: MediaQuery.of(context).size.width * 0.055,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
@@ -158,7 +158,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 36),
             Center(
               child: SizedBox(
                 height: MediaQuery.of(context).size.width * 0.1,
